@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">TP4</string>
+    <string name="app_name">              TP4</string>
+    <string name="a">2350 Av. du Colisée, Québec, QC G1L 5A1, 555–993–1233</string>
+    <string name="b">connexion</string>
+    <string name="c">inscription</string>
 </resources>
