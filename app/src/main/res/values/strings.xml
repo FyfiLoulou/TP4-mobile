@@ -13,4 +13,10 @@
     <string name="nom">nom</string>
     <string name="adres">adresse</string>
     <string name="tel">téléphone</string>
+    <string name="todo">TODO</string>
+    <string name="inscription">Inscription</string>
+    <string name="connexion">Connexion</string>
+    <string name="_76_rue_chaumas">76 rue Chaumas</string>
+    <string name="papa_john_s_pizza">Papa John\'s Pizza</string>
+    <string name="_481_666_6666">481 666-6666</string>
 </resources>
