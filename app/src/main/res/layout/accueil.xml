@@ -13,6 +13,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,10 +39,11 @@
         android:id="@+id/imageView2"
         android:layout_width="187dp"
         android:layout_height="142dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="244dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/a"
         tools:srcCompat="@drawable/a" />
 
     <TextView
@@ -62,7 +64,7 @@
         android:layout_marginTop="76dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground"
+        app:srcCompat="@drawable/asda"
         tools:srcCompat="@drawable/asda" />
 
     <TextView
