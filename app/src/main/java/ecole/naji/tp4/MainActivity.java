@@ -1,5 +1,6 @@
 package ecole.naji.tp4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 
@@ -32,32 +33,24 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> dLayout.openDrawer(Gravity.LEFT));
         setNavigationDrawer();
     }
+
     private void setNavigationDrawer() {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         navView.setNavigationItemSelectedListener(item -> {
-            navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(MenuItem menuItem) {
-                    Fragment fragment = null;
-                    int itemId = menuItem.getItemId();
-/*
-                    switch (itemId) {
-                        case R.id.accueil:
-                            fragment = new FragmentAccueil();
-                            break;
-                    }
-*/
-                    Toast.makeText(getApplicationContext(), menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                    if (fragment != null) {
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame, fragment);
-                        transaction.commit();
-                        dLayout.closeDrawers();
-                        return true;
-                    }
-                    return false;
+            navView.setNavigationItemSelectedListener(menuItem -> {
+                Intent intent = null;
+                int itemId = menuItem.getItemId();
+                if (itemId == R.id.accueil_item) {
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
+                Toast.makeText(getApplicationContext(), menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                if (intent != null) {
+                    dLayout.closeDrawers();
+                    return true;
+                }
+                return false;
             });
             return false;
         });
