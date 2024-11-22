@@ -1,9 +1,19 @@
 package ecole.naji.tp4.models;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "commande")
 public class Commande {
+    @DatabaseField(columnName = "id", generatedId = true)
+    private int id;
+    @DatabaseField(columnName = "no_commande")
     private int noCommande;
+    @DatabaseField(columnName = "nom_client")
     private String nomClient;
+    @DatabaseField(columnName = "montant")
     private double montant;
+    @DatabaseField(columnName = "date")
     private String date;
 
     public Commande(int noCommande, String nomClient, double montant, String date) {

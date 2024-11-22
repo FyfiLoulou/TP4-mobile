@@ -1,8 +1,17 @@
 package ecole.naji.tp4.models;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "pizza")
 public class Pizza {
+    @DatabaseField(generatedId = true)
+    private int id;
+    @DatabaseField(columnName = "sorte")
     private String sorte;
+    @DatabaseField(columnName = "taille")
     private String taille;
+    @DatabaseField(columnName = "prix")
     private double prix;
 
     public Pizza(String sorte, String taille, double prix) {

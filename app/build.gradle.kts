@@ -37,4 +37,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.j256.ormlite:ormlite-android:5.0")
 }

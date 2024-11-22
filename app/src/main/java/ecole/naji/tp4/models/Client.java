@@ -1,11 +1,23 @@
 package ecole.naji.tp4.models;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "client")
 public class Client {
+    @DatabaseField(columnName = "id", generatedId = true)
+    private int id;
+    @DatabaseField(columnName = "nom")
     private String nom; // min length 5
+    @DatabaseField(columnName = "email")
     private String email;
+    @DatabaseField(columnName = "pw")
     private String pw; // min length 6
+    @DatabaseField(columnName = "adresse")
     private String adresse;
+    @DatabaseField(columnName = "tel")
     private String tel;
+    @DatabaseField(columnName = "point")
     private int point; // 10$ commande vaut 100 point
 
     public Client(String nom, String email, String pw, String adresse, String tel, int point) {
