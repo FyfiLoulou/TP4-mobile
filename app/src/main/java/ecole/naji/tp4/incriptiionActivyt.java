@@ -1,8 +1,5 @@
 package ecole.naji.tp4;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,16 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ecole.naji.tp4.R;
-
-public class connexionActivuty extends AppCompatActivity {
+public class incriptiionActivyt extends AppCompatActivity {
     private EditText emailInput;
     private EditText pwInput;
     private Button buttonConnection;
-    private Button buttonNouveauCOmpet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +27,7 @@ public class connexionActivuty extends AppCompatActivity {
     private void initEditField() {
 
         emailInput = findViewById(R.id.editTextText2);
-        buttonConnection = findViewById(R.id.button4);
-        buttonNouveauCOmpet = findViewById(R.id.button3);
+        buttonConnection = findViewById(R.id.button3);
         pwInput = findViewById(R.id.editTextText3);
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,22 +64,13 @@ public class connexionActivuty extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
-
-
-        buttonConnection.setOnClickListener(e->{
-            startActivity(new Intent(this, CommandesActivty.class));
-        });
-
-        buttonNouveauCOmpet.setOnClickListener(e->{
-            startActivity(new Intent(this, incriptiionActivyt.class));
-        });
-
-
     }
     private boolean isValidate(String email) {
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]", Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
     }
+    public void connectionOnClick(View view) {
 
+    }
 }

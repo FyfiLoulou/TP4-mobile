@@ -9,4 +9,8 @@
     <string name="conexnion">connexion</string>
     <string name="crercinote">créer compte</string>
     <string name="newuser">Nouveaux user??c</string>
+
+    <string name="nom">nom</string>
+    <string name="adres">adresse</string>
+    <string name="tel">téléphone</string>
 </resources>
