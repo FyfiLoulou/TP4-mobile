@@ -3,4 +3,14 @@
     <string name="a">2350 Av. du Colisée, Québec, QC G1L 5A1, 555–993–1233</string>
     <string name="b">connexion</string>
     <string name="c">inscription</string>
+    <string name="d">authentification</string>
+    <string name="email">email</string>
+    <string name="pw">mot de passe</string>
+    <string name="conexnion">connexion</string>
+    <string name="crercinote">créer compte</string>
+    <string name="newuser">Nouveaux user??c</string>
+
+    <string name="nom">nom</string>
+    <string name="adres">adresse</string>
+    <string name="tel">téléphone</string>
 </resources>
