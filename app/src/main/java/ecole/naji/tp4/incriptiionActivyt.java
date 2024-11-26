@@ -4,61 +4,73 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class incriptiionActivyt extends AppCompatActivity {
+import ecole.naji.tp4.R;
+
+public class incriptiionActivyt extends Fragment {
+
     private EditText emailInput;
     private EditText pwInput;
-    private EditText nomInpout;
+    private EditText nomInput;
     private EditText adressInput;
-    private EditText telInpout;
+    private EditText telInput;
     private Button buttonCrrer;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.inscription);
-        initEditField();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.inscription, container, false);
+
+        initEditField(rootView);
+        return rootView;
     }
 
-    private void initEditField() {
+    private void initEditField(View rootView) {
 
-        nomInpout = findViewById(R.id.nom);
-        adressInput = findViewById(R.id.adresse);
-        telInpout = findViewById(R.id.tel);
-        emailInput = findViewById(R.id.email);
-        pwInput = findViewById(R.id.pw);
-        buttonCrrer = findViewById(R.id.creer);
+        nomInput = rootView.findViewById(R.id.nom);
+        adressInput = rootView.findViewById(R.id.adresse);
+        telInput = rootView.findViewById(R.id.tel);
+        emailInput = rootView.findViewById(R.id.email);
+        pwInput = rootView.findViewById(R.id.pw);
+        buttonCrrer = rootView.findViewById(R.id.creer);
 
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!isValidate(emailInput.getText().toString())) {
                     emailInput.setError("Addresse Courriel non valide");
                     buttonCrrer.setEnabled(false);
-                }}
+                }
+            }
+
             @Override
             public void afterTextChanged(Editable s) {}
         });
 
-        nomInpout.addTextChangedListener(new TextWatcher() {
+        nomInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (nomInpout.getText().toString().length() > 2) {
-                    nomInpout.setError("Nom non pas non valide");
+                if (nomInput.getText().toString().length() <= 2) {
+                    nomInput.setError("Nom non valide");
                     buttonCrrer.setEnabled(false);
-                }}
+                }
+            }
+
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -66,40 +78,49 @@ public class incriptiionActivyt extends AppCompatActivity {
         pwInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (pwInput.getText().toString().length() < 3) {
-                    pwInput.setError("Pas bon mot passe");
+                    pwInput.setError("Mot de passe trop court");
                     buttonCrrer.setEnabled(false);
-                }}
+                }
+            }
+
             @Override
             public void afterTextChanged(Editable s) {}
         });
 
-        telInpout.addTextChangedListener(new TextWatcher() {
+        telInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (nomInpout.getText().toString().length() < 9) {
-                    nomInpout.setError("Télephone non valide");
+                if (telInput.getText().toString().length() < 9) {
+                    telInput.setError("Numéro de téléphone non valide");
                     buttonCrrer.setEnabled(false);
-                }}
+                }
+            }
+
             @Override
             public void afterTextChanged(Editable s) {}
         });
 
+        buttonCrrer.setOnClickListener(e -> {
+            String nom = nomInput.getText().toString();
+            String email = emailInput.getText().toString();
+            String pw = pwInput.getText().toString();
+            String adresse = adressInput.getText().toString();
+            String tel = telInput.getText().toString();
 
-        buttonCrrer.setOnClickListener(e->{
-            String nom = nomInpout.getText().toString(), email = emailInput.getText().toString(), pw = pwInput.getText().toString(), adresse = adressInput.getText().toString(), tel = telInpout.getText().toString();
-
-            startActivity(new Intent(this, connexionActivuty.class));
-            // TODO STORE BD
+            startActivity(new Intent(getActivity(), connexionActivuty.class));
+            // TODO: Store data in the database
         });
-
     }
+
     private boolean isValidate(String email) {
-        Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]", Pattern.CASE_INSENSITIVE);
+        Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
     }
