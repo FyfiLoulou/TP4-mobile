@@ -9,6 +9,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -32,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(v -> dLayout.openDrawer(Gravity.LEFT));
         setNavigationDrawer();
+    }
+
+    // à copier dans les autres mais inflate l'autre menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.nav_items, menu);
+        return true;
     }
 
     private void setNavigationDrawer() {

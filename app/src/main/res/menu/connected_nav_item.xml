@@ -3,4 +3,10 @@
     <item
         android:id="@+id/accueil_item"
         android:title="@string/accueil" />
+    <item
+        android:id="@+id/conn"
+        android:title="@string/connexion" />
+    <item
+        android:id="@+id/inscription"
+        android:title="@string/inscription" />
 </menu>
