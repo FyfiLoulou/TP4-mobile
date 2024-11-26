@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment, new Accuiel())
+                .commit();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         conn = findViewById(R.id.conn);
         signup = findViewById(R.id.signup);
 
-        conn.setOnClickListener(e->{
-
+        conn.setOnClickListener(e -> {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new connexionActivuty()).commit();
         });
     }
 

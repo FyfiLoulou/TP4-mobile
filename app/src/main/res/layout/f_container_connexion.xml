@@ -1,6 +1,0 @@
-<!-- Inside activity_main.xml or your activity's layout file -->
-<androidx.fragment.app.FragmentContainerView android:id="@+id/fc_connexion"
-    android:name="ecole.naji.tp4.connexionActivuty"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
