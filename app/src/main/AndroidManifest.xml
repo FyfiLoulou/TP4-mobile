@@ -21,18 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".connexionActivuty"
-            android:exported="true" />
-        <activity
-            android:name=".incriptiionActivyt"
-            android:exported="true" />
-        <activity
-            android:name=".CommandesActivty"
-            android:exported="true" />
-        <activity
-            android:name=".UpdateActivite"
-            android:exported="true" />
     </application>
 
 </manifest>
