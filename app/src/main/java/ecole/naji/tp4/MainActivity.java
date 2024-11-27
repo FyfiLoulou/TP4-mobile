@@ -40,12 +40,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> dLayout.openDrawer(Gravity.LEFT));
         setNavigationDrawer();
 
-        conn = findViewById(R.id.conn);
-        signup = findViewById(R.id.signup);
-
-        conn.setOnClickListener(e -> {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new connexionActivuty()).commit();
-        });
     }
 
     // à copier dans les autres mais inflate l'autre menu

@@ -15,7 +15,6 @@
             android:orientation="vertical">
 
 
-            <include layout="@layout/toolbar" />
 
             <ImageView
                 android:id="@+id/imageView2"

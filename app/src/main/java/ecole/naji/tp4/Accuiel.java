@@ -24,9 +24,9 @@ public class Accuiel extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.accueil2, container, false);
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> dLayout.openDrawer(Gravity.LEFT));
-        setNavigationDrawer(view);
+        //Toolbar toolbar = view.findViewById(R.id.toolbar);
+        //toolbar.setNavigationOnClickListener(v -> dLayout.openDrawer(Gravity.LEFT));
+        //setNavigationDrawer(view);
 
         conn = view.findViewById(R.id.conn);
         signup = view.findViewById(R.id.signup);
@@ -42,6 +42,8 @@ public class Accuiel extends Fragment {
                     .replace(R.id.fragment, new incriptiionActivyt())
                     .commit();
         });
+
+
 
         return view;
     }
