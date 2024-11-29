@@ -86,7 +86,7 @@ public class incriptiionActivyt extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (pwInput.getText().toString().length() < 3) {
+                if (pwInput.getText().toString().length() < 5) {
                     pwInput.setError("Mot de passe trop court");
                     buttonCrrer.setEnabled(false);
                 }
