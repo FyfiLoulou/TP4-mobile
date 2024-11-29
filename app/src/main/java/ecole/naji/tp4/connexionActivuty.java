@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -25,7 +26,7 @@ public class connexionActivuty extends Fragment {
 
     private EditText emailInput;
     private EditText pwInput;
-    private EditText error;
+    private TextView error;
     private Button buttonConnection;
     private Button buttonNouveauCompet;
     private DatabaseManger data;
