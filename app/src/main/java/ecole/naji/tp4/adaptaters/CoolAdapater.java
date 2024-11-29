@@ -11,19 +11,25 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
 
+import ecole.naji.tp4.DatabaseManger;
+import ecole.naji.tp4.MainActivity;
 import ecole.naji.tp4.R;
+import ecole.naji.tp4.models.Commande;
 import ecole.naji.tp4.models.Pizza;
 
 public class CoolAdapater extends BaseAdapter {
 
     private List<Pizza> pizzaList;
     private Context context;
+    private DatabaseManger data;
 
     public CoolAdapater(List<Pizza> pizzaList, Context context) {
         this.pizzaList = pizzaList;
         this.context = context;
+        this.data = DatabaseManger.getInstance(context);
     }
 
     @Override
@@ -64,7 +70,8 @@ public class CoolAdapater extends BaseAdapter {
         spinner.setAdapter(adapter);
 
         buttonAjouter.setOnClickListener(e->{
-            Log.w("lol", "asasasdsa");
+            data.insertCommande(new Commande(MainActivity.userConnected, pizza.getPrix(), new Date().toString()));
+            Log.w("lol", "added command");
         });
 
         return convertView;
