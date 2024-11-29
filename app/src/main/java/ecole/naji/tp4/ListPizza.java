@@ -34,8 +34,6 @@ public class ListPizza extends Fragment {
 
         PIZZAZ = rootView.findViewById(R.id.idkidkidkidkidk);
 
-        Log.i("runtime", String.valueOf(data));
-
 
         pizzaList = data.readPizzasses();
         // SI PAS PIZZA AJOUTER PIZZA DÉFAUT

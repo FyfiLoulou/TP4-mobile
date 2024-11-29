@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,10 +19,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import ecole.naji.tp4.ProfilFrag;
+
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout dLayout;
-    public static int userConnected = 1; // -1 when no user connected else id
+    public static int userConnected = -1; // -1 when no user connected else id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +62,13 @@ public class MainActivity extends AppCompatActivity {
         if (itemId == R.id.accueil_item) {
             fragment = new Accuiel();
         } else if (itemId == R.id.pizzas_item) {
-            fragment = new pizzasFrag();
+            fragment = new CommandesActivty();
         } else if (itemId == R.id.profil_item) {
-            fragment = new ProfilFrag();
+            fragment = new UpdateProfileTime();
         } else if (itemId == R.id.commandes_item) {
             fragment = new ListPizza();
+        } else if (itemId == R.id.points_item) {
+            fragment = new pointsFrag();
         }
         return fragment;
     }
