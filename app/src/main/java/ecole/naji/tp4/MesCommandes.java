@@ -17,6 +17,7 @@ import java.util.List;
 
 import java.util.Objects;
 
+import ecole.naji.tp4.adaptaters.CommandesAdapter;
 import ecole.naji.tp4.adaptaters.CoolAdapater;
 import ecole.naji.tp4.models.Commande;
 
@@ -39,7 +40,7 @@ public class MesCommandes extends Fragment {
         payer = requireActivity().findViewById(R.id.payer);
         payer.setOnClickListener(e -> handlePayer());
         handlePriceCalc();
-        CommandeAdapter coolAdapater = new CommandeAdapter(getContext(), DatabaseManger.getInstance(getContext()));
+        CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), DatabaseManger.getInstance(getContext()));
         listPidz.setAdapter(coolAdapater);
         return inflater.inflate(R.layout.mes_commandes_frag, container, false);
     }
