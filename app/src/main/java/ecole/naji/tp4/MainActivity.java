@@ -30,28 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new Accuiel()).commit();
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(v -> dLayout.openDrawer(Gravity.LEFT));
         setNavigationDrawer();
-
-    }
-
-    // à copier dans les autres mais inflate l'autre menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!userConnected) {
-            getMenuInflater().inflate(R.menu.nav_items, menu);
-            return true;
-        }
-        getMenuInflater().inflate(R.menu.connected_nav_item, menu);
-        return true;
     }
 
     private void setNavigationDrawer() {
         dLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = findViewById(R.id.navigation);
+        if (userConnected) navView.inflateMenu(R.menu.connected_nav_item);
         navView.setNavigationItemSelectedListener(item -> {
             Fragment fragment = null;
             int itemId = item.getItemId();
