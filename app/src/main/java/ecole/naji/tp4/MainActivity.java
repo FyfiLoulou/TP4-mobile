@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,8 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.google.android.material.navigation.NavigationView;
-
-import ecole.naji.tp4.models.ProfilFrag;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (itemId == R.id.commandes_item) {
                 fragment = new CommandesActivty();
+            }
+            else if (itemId == R.id.points_item) {
+                fragment = new pointsFrag();
             }
 
             Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package ecole.naji.tp4.models;
+package ecole.naji.tp4;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
