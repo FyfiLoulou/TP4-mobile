@@ -24,7 +24,7 @@ import ecole.naji.tp4.ProfilFrag;
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout dLayout;
-    public static int userConnected = 1; // -1 when no user connected else id
+    public static int userConnected = -1; // -1 when no user connected else id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
