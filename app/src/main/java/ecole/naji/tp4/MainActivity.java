@@ -23,7 +23,7 @@ import ecole.naji.tp4.models.ProfilFrag;
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout dLayout;
-    boolean userConnected = false;
+    boolean userConnected = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
