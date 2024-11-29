@@ -13,4 +13,12 @@
         android:layout_height="100dp"
         android:src="@drawable/cool_pidz"
         android:layout_marginStart="65dp"/>
+
+    <ImageView
+        android:id="@+id/proifileincontochange"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="65dp"
+        android:src="@drawable/guy"
+        android:visibility="invisible" />
 </androidx.appcompat.widget.Toolbar>

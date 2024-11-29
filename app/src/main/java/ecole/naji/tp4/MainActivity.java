@@ -42,12 +42,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navView = findViewById(R.id.navigation);
         Log.w("lol2", userConnected + "");
         if (userConnected > 0) navView.inflateMenu(R.menu.connected_nav_item);
+
         navView.setNavigationItemSelectedListener(item -> {
             Fragment fragment = getFragment(item);
             Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
-            Log.wtf("lol2", fragment.toString());
             if (fragment != null) {
-                Log.w("lol2", userConnected + "7");
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment, fragment);
                 ft.commit();
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private static Fragment getFragment(MenuItem item) {
+    public static Fragment getFragment(MenuItem item) {
         Fragment fragment = null;
         int itemId = item.getItemId();
         if (itemId == R.id.accueil_item) {

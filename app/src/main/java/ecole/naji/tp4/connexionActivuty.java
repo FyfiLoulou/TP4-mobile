@@ -1,5 +1,6 @@
 package ecole.naji.tp4;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,9 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -94,8 +100,26 @@ public class connexionActivuty extends Fragment {
                 Client c = client.get();
                 MainActivity.userConnected = c.getId();
                 getParentFragmentManager().beginTransaction().replace(R.id.fragment, new ListPizza()).commit();
-                Log.i("lol", c.getId() + "");
-                //FUCK ME PLS FIXstartActivity(new Intent(this, MainActivity.class));
+                Log.i("lol", c.getId() + " (←clientId) is connected");
+
+                DrawerLayout dLayout = getActivity().findViewById(R.id.drawer_layout);
+                NavigationView navView = getActivity().findViewById(R.id.navigation);
+                navView.inflateMenu(R.menu.connected_nav_item);
+                getActivity().findViewById(R.id.proifileincontochange).setVisibility(View.VISIBLE);
+                getActivity().findViewById(R.id.proifileincontochange).setOnClickListener(ee->{
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragment, new UpdateProfileTime()).commit();
+                });
+                navView.setNavigationItemSelectedListener(item -> {
+                    Fragment fragment = MainActivity.getFragment(item);
+                    Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                    if (fragment != null) {
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
+                        dLayout.closeDrawers();
+                        return true;
+                    }
+                    return false;
+                });
+
             } else {
                 error.setText("Le compte n'existe pas");
             }
