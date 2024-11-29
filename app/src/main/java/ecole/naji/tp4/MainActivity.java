@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setNavigationDrawer() {
-        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navView = (NavigationView) findViewById(R.id.navigation);
+        dLayout = findViewById(R.id.drawer_layout);
+        NavigationView navView = findViewById(R.id.navigation);
         navView.setNavigationItemSelectedListener(item -> {
             Fragment fragment = null;
             int itemId = item.getItemId();
