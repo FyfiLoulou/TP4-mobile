@@ -27,18 +27,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment, new Accuiel())
-                .commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new Accuiel()).commit();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dLayout.openDrawer(Gravity.LEFT);
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> dLayout.openDrawer(Gravity.LEFT));
         setNavigationDrawer();
 
     }
