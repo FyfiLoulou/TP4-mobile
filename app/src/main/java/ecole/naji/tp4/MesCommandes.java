@@ -11,7 +11,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
 import java.util.Objects;
+
+import ecole.naji.tp4.adaptaters.CommandesAdapter;
+import ecole.naji.tp4.adaptaters.CoolAdapater;
+import ecole.naji.tp4.models.Commande;
 
 public class MesCommandes extends Fragment {
 
@@ -30,9 +35,10 @@ public class MesCommandes extends Fragment {
         econo = requireActivity().findViewById(R.id.econo);
         endPrice = requireActivity().findViewById(R.id.end_price);
         payer = requireActivity().findViewById(R.id.payer);
-
         payer.setOnClickListener(e -> handlePayer());
         handlePriceCalc();
+        CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), DatabaseManger.getInstance(getContext()));
+        listPidz.setAdapter(coolAdapater);
         return inflater.inflate(R.layout.mes_commandes_frag, container, false);
     }
 

@@ -19,12 +19,12 @@ import ecole.naji.tp4.R;
 import ecole.naji.tp4.models.Commande;
 import ecole.naji.tp4.models.Pizza;
 
-public class commandesAdapter extends BaseAdapter {
+public class CommandesAdapter extends BaseAdapter {
     private List<Commande> commandeList;
     private Context context;
     private DatabaseManger db;
 
-    public commandesAdapter(List<Commande> commandeList, Context context, DatabaseManger db) {
+    public CommandesAdapter(Context context, DatabaseManger db) {
         this.db = db;
         this.commandeList = commandeList.stream().filter(c -> c.getIdClient() == MainActivity.userConnected).collect(Collectors.toList());
         this.context = context;
