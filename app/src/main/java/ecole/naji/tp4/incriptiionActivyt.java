@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ecole.naji.tp4.R;
+import ecole.naji.tp4.models.Client;
 
 public class incriptiionActivyt extends Fragment {
 
@@ -25,10 +27,12 @@ public class incriptiionActivyt extends Fragment {
     private EditText adressInput;
     private EditText telInput;
     private Button buttonCrrer;
+    private DatabaseManger data;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.inscription, container, false);
+        data = DatabaseManger.getInstance(getContext());
 
         initEditField(rootView);
         return rootView;
@@ -42,6 +46,7 @@ public class incriptiionActivyt extends Fragment {
         emailInput = rootView.findViewById(R.id.email);
         pwInput = rootView.findViewById(R.id.pw);
         buttonCrrer = rootView.findViewById(R.id.creer);
+        buttonCrrer.setEnabled(false);
 
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -97,6 +102,7 @@ public class incriptiionActivyt extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                buttonCrrer.setEnabled(true);
                 if (telInput.getText().toString().length() < 9) {
                     telInput.setError("Numéro de téléphone non valide");
                     buttonCrrer.setEnabled(false);
@@ -114,8 +120,11 @@ public class incriptiionActivyt extends Fragment {
             String adresse = adressInput.getText().toString();
             String tel = telInput.getText().toString();
 
-            startActivity(new Intent(getActivity(), connexionActivuty.class));
-            // TODO: Store data in the database
+            Client newCLient = new Client(nom, email, pw, adresse, tel, 10);
+            Log.w("lol", newCLient.toString());
+            data.insertClient(newCLient);
+
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment, new connexionActivuty()).commit();
         });
     }
 
