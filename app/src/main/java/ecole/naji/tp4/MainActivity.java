@@ -56,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.accueil_item) {
                 fragment = new Accuiel();
             }
+            else if (itemId == R.id.pizzas_item) {
+                fragment = new pizzasFrag();
+            }
+            else if (itemId == R.id.commandes_item) {
+                fragment = new CommandesActivty();
+            }
+
             Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
             if (fragment != null) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

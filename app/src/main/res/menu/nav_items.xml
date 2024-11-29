@@ -3,4 +3,16 @@
     <item
         android:id="@+id/accueil_item"
         android:title="@string/accueil" />
+    <item
+        android:id="@+id/pizzas_item"
+        android:title="Pizzas" />
+    <item
+        android:id="@+id/profil_item"
+        android:title="Profil" />
+    <item
+        android:id="@+id/commandes_item"
+        android:title="Mes commandes" />
+    <item
+        android:id="@+id/points_item"
+        android:title="Mes points" />
 </menu>
