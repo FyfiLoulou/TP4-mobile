@@ -1,5 +1,6 @@
 package ecole.naji.tp4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -50,7 +51,8 @@ public class connexionActivuty extends Fragment {
 
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -61,12 +63,14 @@ public class connexionActivuty extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         pwInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -78,18 +82,20 @@ public class connexionActivuty extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         buttonConnection.setOnClickListener(e -> {
             String emailValue = emailInput.getText().toString(), pwValue = String.valueOf(pwInput.getText());
 
-            Optional<Client> client = data.readClientelle().stream().filter(u-> Objects.equals(u.getEmail(), emailValue) && Objects.equals(u.getPw(), pwValue)).findFirst();
+            Optional<Client> client = data.readClientelle().stream().filter(u -> Objects.equals(u.getEmail(), emailValue) && Objects.equals(u.getPw(), pwValue)).findFirst();
             if (client.isPresent()) {
                 Client c = client.get();
                 MainActivity.userConnected = c.getId();
                 getParentFragmentManager().beginTransaction().replace(R.id.fragment, new ListPizza()).commit();
-                Log.i("lol", c.getId()+"");
+                Log.i("lol", c.getId() + "");
+                //FUCK ME PLS FIXstartActivity(new Intent(this, MainActivity.class));
             } else {
                 error.setText("Le compte n'existe pas");
             }

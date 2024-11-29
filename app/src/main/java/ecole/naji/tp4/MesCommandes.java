@@ -1,6 +1,5 @@
 package ecole.naji.tp4;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +13,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
 
 import java.util.Objects;
+
+import ecole.naji.tp4.adaptaters.CommandesAdapter;
+import ecole.naji.tp4.adaptaters.CoolAdapater;
+import ecole.naji.tp4.models.Commande;
 
 public class MesCommandes extends Fragment {
 
@@ -34,9 +38,10 @@ public class MesCommandes extends Fragment {
         econo = requireActivity().findViewById(R.id.econo);
         endPrice = requireActivity().findViewById(R.id.end_price);
         payer = requireActivity().findViewById(R.id.payer);
-
         payer.setOnClickListener(e -> handlePayer());
         handlePriceCalc();
+        CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), DatabaseManger.getInstance(getContext()));
+        listPidz.setAdapter(coolAdapater);
         return inflater.inflate(R.layout.mes_commandes_frag, container, false);
     }
 

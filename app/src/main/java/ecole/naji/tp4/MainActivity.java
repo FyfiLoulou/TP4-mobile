@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,14 +37,17 @@ public class MainActivity extends AppCompatActivity {
         setNavigationDrawer();
     }
 
-    private void setNavigationDrawer() {
+    public void setNavigationDrawer() {
         dLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = findViewById(R.id.navigation);
+        Log.w("lol2", userConnected + "");
         if (userConnected > 0) navView.inflateMenu(R.menu.connected_nav_item);
         navView.setNavigationItemSelectedListener(item -> {
             Fragment fragment = getFragment(item);
             Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+            Log.wtf("lol2", fragment.toString());
             if (fragment != null) {
+                Log.w("lol2", userConnected + "7");
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment, fragment);
                 ft.commit();
