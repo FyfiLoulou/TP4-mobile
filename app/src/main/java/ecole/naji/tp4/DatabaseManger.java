@@ -17,12 +17,12 @@ import ecole.naji.tp4.models.Pizza;
 
 public class DatabaseManger extends OrmLiteSqliteOpenHelper {
     private static final String DATABESE_NAME = "HairryPizzaBunnyTown.db";
-    private static final int DATABESE_VERSION = 1;
+    private static final int DATABESE_JAIME_DANSER_VERSION = 1;
 
     private static DatabaseManger instance;
 
     private DatabaseManger(Context context) {
-        super(context, DATABESE_NAME, null, DATABESE_VERSION);
+        super(context, DATABESE_NAME, null, DATABESE_JAIME_DANSER_VERSION);
     }
 
     public static synchronized DatabaseManger getInstance(Context context) {
@@ -60,6 +60,15 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
     public void insertClient(Client client) {
         try {
             getDao(Client.class).create(client);
+            Log.i("DATABES INSERTED", client.toString());
+        } catch (Exception e) {
+            Log.e("DATABSES ERROR", "ERROR: po marcehre la jout des scores" + e.getMessage());
+        }
+    }
+
+    public void updateClient(Client client) {
+        try {
+            getDao(Client.class).update(client);
             Log.i("DATABES INSERTED", "Score inserted" + client.toString());
         } catch (Exception e) {
             Log.e("DATABSES ERROR", "ERROR: po marcehre la jout des scores" + e.getMessage());

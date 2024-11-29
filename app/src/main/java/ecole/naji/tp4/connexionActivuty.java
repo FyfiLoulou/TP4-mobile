@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -25,6 +26,7 @@ public class connexionActivuty extends Fragment {
 
     private EditText emailInput;
     private EditText pwInput;
+    private TextView error;
     private Button buttonConnection;
     private Button buttonNouveauCompet;
     private DatabaseManger data;
@@ -43,6 +45,7 @@ public class connexionActivuty extends Fragment {
         buttonConnection = rootView.findViewById(R.id.button44);
         buttonNouveauCompet = rootView.findViewById(R.id.button3);
         pwInput = rootView.findViewById(R.id.editTextText3);
+        error = rootView.findViewById(R.id.textView122);
         buttonConnection.setEnabled(false);
 
         emailInput.addTextChangedListener(new TextWatcher() {
@@ -85,10 +88,10 @@ public class connexionActivuty extends Fragment {
             if (client.isPresent()) {
                 Client c = client.get();
                 MainActivity.userConnected = c.getId();
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment, new CommandesActivty()).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment, new ListPizza()).commit();
                 Log.i("lol", c.getId()+"");
             } else {
-                // TODO SHOW ERROR
+                error.setText("Le compte n'existe pas");
             }
         });
 

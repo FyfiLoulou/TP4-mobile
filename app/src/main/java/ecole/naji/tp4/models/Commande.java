@@ -9,6 +9,8 @@ public class Commande {
     private int id;
     @DatabaseField(columnName = "nom_client")
     private int idClient;
+    @DatabaseField(columnName = "pidz_id")
+    private int pidzId;
     @DatabaseField(columnName = "montant")
     private double montant;
     @DatabaseField(columnName = "date")
@@ -23,12 +25,28 @@ public class Commande {
     public Commande() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+
     public int getIdClient() {
         return idClient;
     }
 
     public void setIdClient(int idClient) {
         this.idClient = idClient;
+    }
+
+    public int getPidzId() {
+        return pidzId;
+    }
+
+    public void setPidzId(int pidzId) {
+        this.pidzId = pidzId;
     }
 
     public double getMontant() {
