@@ -3,11 +3,13 @@ package ecole.naji.tp4;
 import android.os.Bundle;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,15 +25,13 @@ import ecole.naji.tp4.models.ProfilFrag;
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout dLayout;
-    boolean userConnected = true;
+    public static int userConnected = -1; // -1 when no user connected else id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new Accuiel()).commit();
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -42,23 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private void setNavigationDrawer() {
         dLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = findViewById(R.id.navigation);
-        if (userConnected) navView.inflateMenu(R.menu.connected_nav_item);
+        if (userConnected > 0) navView.inflateMenu(R.menu.connected_nav_item);
         navView.setNavigationItemSelectedListener(item -> {
-            Fragment fragment = null;
-            int itemId = item.getItemId();
-            if (itemId == R.id.accueil_item) {
-                fragment = new Accuiel();
-            }
-            else if (itemId == R.id.pizzas_item) {
-                fragment = new pizzasFrag();
-            }
-            else if (itemId == R.id.profil_item) {
-                fragment = new ProfilFrag();
-            }
-            else if (itemId == R.id.commandes_item) {
-                fragment = new CommandesActivty();
-            }
-
+            Fragment fragment = getFragment(item);
             Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
             if (fragment != null) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -69,5 +55,20 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private static Fragment getFragment(MenuItem item) {
+        Fragment fragment = null;
+        int itemId = item.getItemId();
+        if (itemId == R.id.accueil_item) {
+            fragment = new Accuiel();
+        } else if (itemId == R.id.pizzas_item) {
+            fragment = new pizzasFrag();
+        } else if (itemId == R.id.profil_item) {
+            fragment = new ProfilFrag();
+        } else if (itemId == R.id.commandes_item) {
+            fragment = new CommandesActivty();
+        }
+        return fragment;
     }
 }
