@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#A52A2A"
+    android:icon="@drawable/car_ui_icon_error"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:navigationIcon="@drawable/barres"
-    app:title="TP4"
     app:titleTextColor="#FFF">
 
 </androidx.appcompat.widget.Toolbar>
