@@ -25,4 +25,7 @@
     <string name="total_avec_points">Total avec points :</string>
     <string name="vous_conomisez">Vous économisez :</string>
     <string name="payer">Payer</string>
+    <string name="prix">prix</string>
+    <string name="plus">+</string>
+    <string name="moins">-</string>
 </resources>

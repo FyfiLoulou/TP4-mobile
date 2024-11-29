@@ -1,6 +1,5 @@
 package ecole.naji.tp4;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,8 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import ecole.naji.tp4.R;
 
 public class connexionActivuty extends Fragment {
 
@@ -78,7 +75,7 @@ public class connexionActivuty extends Fragment {
 
         buttonNouveauCompet.setOnClickListener(e -> {
             getParentFragmentManager().beginTransaction()
-                    .replace(R.id.fragment, new CommandesActivty())
+                    .replace(R.id.fragment, new ListPizza())
                     .commit();
         });
     }
