@@ -3,6 +3,10 @@ package ecole.naji.tp4.models;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @DatabaseTable(tableName = "pizza")
 public class Pizza {
     @DatabaseField(generatedId = true)
@@ -14,13 +18,34 @@ public class Pizza {
     @DatabaseField(columnName = "prix")
     private double prix;
 
-    public Pizza(String sorte, String taille, double prix) {
+    @DatabaseField(columnName = "imgId")
+    private int imgId;
+
+    public Pizza(String sorte, String taille, double prix, int imgId) {
         this.sorte = sorte;
         this.taille = taille;
         this.prix = prix;
+        this.imgId = imgId;
     }
 
     public Pizza() {
+    }
+
+    public String[][] getOptions() {
+        String[][] a = {{"pépito", prix*0.5+""},{"Moyenne", prix+""},{"grosse", prix*27.5+""}};
+        return a;
+    };
+
+    public int getId() {
+        return id;
+    }
+
+    public int getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(int imgId) {
+        this.imgId = imgId;
     }
 
     public String getSorte() {
