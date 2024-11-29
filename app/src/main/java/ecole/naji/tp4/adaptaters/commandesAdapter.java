@@ -52,7 +52,7 @@ public class commandesAdapter extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(context);
             view = inflater.inflate(R.layout.cool_commandes_model_pour_les_trucs_cool, viewGroup);
         }
-        Pizza pidz = db.readPizzasses();
+        Pizza pidz = db.readPizzasses().stream().filter(p->p.getId()==commandeList.get(i).getPidzId()).findFirst().get();
         ImageView pidzImg = view.findViewById(R.id.imgPidz);
         TextView price = view.findViewById(R.id.price);
         TextView total = view.findViewById(R.id.total_price);

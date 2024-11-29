@@ -87,7 +87,7 @@ public class connexionActivuty extends Fragment {
             if (client.isPresent()) {
                 Client c = client.get();
                 MainActivity.userConnected = c.getId();
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment, new CommandesActivty()).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment, new ListPizza()).commit();
                 Log.i("lol", c.getId()+"");
             } else {
                 error.setText("Le compte n'existe pas");

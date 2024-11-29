@@ -34,7 +34,7 @@ public class UpdateProfileTime extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.update_dude, container, false);
         data = DatabaseManger.getInstance(getContext());
-        connectedClient = data.readClientelle().stream().filter(u->u.getId()==MainActivity.userConnected).findFirst().get();
+        connectedClient = data.readClientelle().stream().filter(u -> u.getId() == MainActivity.userConnected).findFirst().get();
 
         initEditField(rootView);
         return rootView;
@@ -58,7 +58,8 @@ public class UpdateProfileTime extends Fragment {
 
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -69,12 +70,14 @@ public class UpdateProfileTime extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         nomInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -85,12 +88,14 @@ public class UpdateProfileTime extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         pwInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -101,12 +106,14 @@ public class UpdateProfileTime extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         telInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -118,7 +125,8 @@ public class UpdateProfileTime extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         updateButn.setOnClickListener(e -> {
@@ -135,7 +143,7 @@ public class UpdateProfileTime extends Fragment {
             connectedClient.setTel(tel);
             data.updateClient(connectedClient);
             Log.w("lol", connectedClient.toString());
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment, new CommandesActivty()).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment, new ListPizza()).commit();
         });
     }
 
