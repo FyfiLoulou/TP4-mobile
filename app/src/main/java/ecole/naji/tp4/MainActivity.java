@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
-import ecole.naji.tp4.models.ProfilFrag;
+import ecole.naji.tp4.ProfilFrag;
 
 public class MainActivity extends AppCompatActivity {
 
