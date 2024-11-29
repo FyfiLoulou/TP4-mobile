@@ -24,7 +24,7 @@ import ecole.naji.tp4.ProfilFrag;
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout dLayout;
-    public static int userConnected = -1; // -1 when no user connected else id
+    public static int userConnected = 1; // -1 when no user connected else id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +62,14 @@ public class MainActivity extends AppCompatActivity {
         if (itemId == R.id.accueil_item) {
             fragment = new Accuiel();
         } else if (itemId == R.id.pizzas_item) {
-            fragment = new pizzasFrag();
+            fragment = new CommandesActivty();
         } else if (itemId == R.id.profil_item) {
             fragment = new ProfilFrag();
         } else if (itemId == R.id.commandes_item) {
-            fragment = new CommandesActivty();
+            fragment = new MesCommandes();
+        }
+        else if (itemId == R.id.points_item) {
+            fragment = new pointsFrag();
         }
         return fragment;
     }
