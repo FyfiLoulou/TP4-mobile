@@ -9,32 +9,35 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:maxWidth="75dp"
+        android:maxHeight="75dp"
+        android:minWidth="75dp"
+        android:minHeight="75dp"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/guy" />
 
     <TextView
         android:id="@+id/pizzaName"
-        android:layout_width="wrap_content"
-        android:layout_height="79dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="143dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="48dp"
         android:text="@string/nom"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/pizzaType"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pizzaType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="147dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
         android:text="type"
         android:textColor="#888888"
         android:textSize="14sp"
@@ -43,10 +46,11 @@
 
     <Spinner
         android:id="@+id/spinnerCool"
-        android:layout_width="134dp"
-        android:layout_height="86dp"
+        android:layout_width="165dp"
+        android:layout_height="83dp"
         android:layout_marginStart="228dp"
         android:layout_marginTop="4dp"
+        android:textAlignment="textEnd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,10 +58,9 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="260dp"
         android:text="ajouter"
-        app:layout_constraintStart_toEndOf="@+id/pizzaName"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCool" />
 
 

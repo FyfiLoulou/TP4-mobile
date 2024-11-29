@@ -72,11 +72,14 @@ public class connexionActivuty extends Fragment {
         });
 
         buttonConnection.setOnClickListener(e -> {
+
             //startActivity(new Intent(getActivity(), CommandesActivty.class));
         });
 
         buttonNouveauCompet.setOnClickListener(e -> {
-            //startActivity(new Intent(getActivity(), incriptiionActivyt.class));
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment, new CommandesActivty())
+                    .commit();
         });
     }
 
