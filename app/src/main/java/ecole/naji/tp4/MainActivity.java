@@ -18,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import ecole.naji.tp4.models.ProfilFrag;
+
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout dLayout;
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (itemId == R.id.pizzas_item) {
                 fragment = new pizzasFrag();
+            }
+            else if (itemId == R.id.profil_item) {
+                fragment = new ProfilFrag();
             }
             else if (itemId == R.id.commandes_item) {
                 fragment = new CommandesActivty();

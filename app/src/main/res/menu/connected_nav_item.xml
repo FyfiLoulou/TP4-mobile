@@ -4,6 +4,26 @@
         android:id="@+id/accueil_item"
         android:title="@string/accueil" />
     <item
+        android:id="@+id/pizzas_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Pizzas" />
+    <item
+        android:id="@+id/profil_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Profil" />
+    <item
+        android:id="@+id/commandes_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Mes commandes" />
+    <item
+        android:id="@+id/points_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Mes points" />
+    <item
         android:id="@+id/conn"
         android:title="@string/connexion" />
     <item
