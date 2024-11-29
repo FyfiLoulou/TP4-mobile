@@ -1,6 +1,8 @@
 package ecole.naji.tp4;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +11,9 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
 
 import java.util.Objects;
 
@@ -42,5 +46,19 @@ public class MesCommandes extends Fragment {
 
     // TODO! faire en sorte que sa marche genre
     private void handlePayer() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("ADD to CARDE");
+        builder.setMessage("Passer avais la caisse pour payement par Carde");
+        builder.setNeutralButton("Je ne sais pas", (dialog, which) -> {
+            Log.w("lol", "PAYER");
+        });
+        builder.setNegativeButton("NON", (dialog, which) -> {
+            Log.w("lol", "PAS PAYER");
+        });
+        builder.setPositiveButton("moui", (dialog, which) -> {
+            Log.w("lol", "PAYER");
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
