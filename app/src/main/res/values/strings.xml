@@ -9,7 +9,6 @@
     <string name="conexnion">connexion</string>
     <string name="crercinote">créer compte</string>
     <string name="newuser">Nouveaux user??c</string>
-
     <string name="nom">nom</string>
     <string name="adres">adresse</string>
     <string name="tel">téléphone</string>
@@ -21,4 +20,9 @@
     <string name="_481_666_6666">481 666-6666</string>
     <string name="accueil">Accueil</string>
     <string name="upda">update</string>
+    <string name="total_price">Total price:</string>
+    <string name="utiliser_vos_points">Utiliser vos Points?</string>
+    <string name="total_avec_points">Total avec points :</string>
+    <string name="vous_conomisez">Vous économisez :</string>
+    <string name="payer">Payer</string>
 </resources>
