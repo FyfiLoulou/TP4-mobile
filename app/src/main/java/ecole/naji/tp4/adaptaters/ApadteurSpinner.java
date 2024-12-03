@@ -13,11 +13,13 @@ import ecole.naji.tp4.models.Pizza;
 public class ApadteurSpinner extends ArrayAdapter<String[]> {
     private Context context;
     private Pizza pizzasses;
+    private CoolAdapater idk;
 
-    public ApadteurSpinner(Context context, Pizza pizz) {
+    public ApadteurSpinner(Context context, Pizza pizz, CoolAdapater coolAdapater) {
         super(context, R.layout.spinner_prix);
         this.context = context;
         this.pizzasses = pizz;
+        this.idk = coolAdapater;
     }
 
     @Override
@@ -55,6 +57,8 @@ public class ApadteurSpinner extends ArrayAdapter<String[]> {
         String[] option = pizzasses.getOptions()[position];
         size.setText(option[0]);
         price.setText(option[1]);
+
+        idk.prixe = Double.parseDouble(option[1]);
 
         return convertView;
     }
