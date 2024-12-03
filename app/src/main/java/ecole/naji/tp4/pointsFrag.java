@@ -9,13 +9,15 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import ecole.naji.tp4.models.Client;
+
 public class pointsFrag extends Fragment {
 
+    //l'argent qu'on a dépensé adate (le 10 c'est un exemple c'est psa permanent)
     public double money = 10;
-    private int pts = 0;
     private TextView points;
-
     private double valeurPts;
+    Client client = new Client();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -28,18 +30,17 @@ public class pointsFrag extends Fragment {
         calculerPts();
         calculerValeur();
 
-        points.setText(pts + "");
+        points.setText(client.getPoint() + "");
 
         return view;
     }
 
-
     public void calculerPts(){
-        pts = (int) money * 10;
+        client.setPoint((int) money * 10);
     }
 
     public void calculerValeur(){
-        valeurPts = pts * 0.0075 ;
-        System.out.println(pts + " points valent " + valeurPts + "$");
+        valeurPts = client.getPoint() * 0.0075 ;
+        System.out.println(client.getPoint() + " points valent " + valeurPts + "$");
     }
 }
