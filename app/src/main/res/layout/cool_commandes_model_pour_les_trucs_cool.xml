@@ -22,7 +22,7 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/todo" />
+            android:text="" />
 
         <TextView
             android:id="@+id/textView13"
@@ -34,7 +34,7 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/todo" />
+            android:text="" />
 
         <TextView
             android:id="@+id/textView17"
@@ -46,7 +46,7 @@
             android:id="@+id/total_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/todo" />
+            android:text=""/>
     </LinearLayout>
 
     <LinearLayout
@@ -65,7 +65,7 @@
             android:id="@+id/qte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/todo" />
+            android:text="" />
 
         <Button
             android:id="@+id/moins"
