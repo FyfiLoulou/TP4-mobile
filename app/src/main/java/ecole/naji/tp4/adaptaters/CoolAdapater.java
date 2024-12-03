@@ -26,6 +26,8 @@ public class CoolAdapater extends BaseAdapter {
     private Context context;
     private DatabaseManger data;
 
+    public double prixe;
+
     public CoolAdapater(List<Pizza> pizzaList, Context context) {
         this.pizzaList = pizzaList;
         this.context = context;
@@ -66,12 +68,14 @@ public class CoolAdapater extends BaseAdapter {
         sorte.setText(pizza.getSorte());
         taille.setText(pizza.getTaille());
 
-        ApadteurSpinner adapter = new ApadteurSpinner(context, pizza);
+        prixe = pizza.getPrix();
+
+        ApadteurSpinner adapter = new ApadteurSpinner(context, pizza, this);
         spinner.setAdapter(adapter);
 
         buttonAjouter.setOnClickListener(e->{
-            data.insertCommande(new Commande(MainActivity.userConnected, pizza.getPrix(), new Date().toString()));
-            Log.w("lol", "added command");
+            data.insertCommande(new Commande(MainActivity.userConnected, prixe, new Date().toString()));
+            Log.w("lol", "added command: "+prixe);
         });
 
         return convertView;
