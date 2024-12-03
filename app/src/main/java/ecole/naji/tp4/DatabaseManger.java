@@ -93,6 +93,15 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    public void updateCommmandeClien(Commande cliencommande) {
+        try {
+            getDao(Commande.class).update(cliencommande);
+            Log.i("DATABES INSERTED", "Score inserted" + cliencommande.toString());
+        } catch (Exception e) {
+            Log.e("DATABSES ERROR", "ERROR: po marcehre la jout des scores" + e.getMessage());
+        }
+    }
+
     public List<Pizza> readPizzasses() {
         try {
             Dao<Pizza, Integer> dao = getDao(Pizza.class);
