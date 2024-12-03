@@ -2,6 +2,7 @@ package ecole.naji.tp4.adaptaters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,9 @@ public class CommandesAdapter extends BaseAdapter {
     private Context context;
     private DatabaseManger db;
 
-    public CommandesAdapter(Context context, DatabaseManger db) {
+    public CommandesAdapter(Context context, DatabaseManger db, List<Commande> comms) {
         this.db = db;
-        this.commandeList = commandeList.stream().filter(c -> c.getIdClient() == MainActivity.userConnected).collect(Collectors.toList());
+        this.commandeList = comms.stream().filter(c -> c.getIdClient() == MainActivity.userConnected).collect(Collectors.toList());
         this.context = context;
     }
 
@@ -45,35 +46,52 @@ public class CommandesAdapter extends BaseAdapter {
         return commandeList.get(i).getId();
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            view = inflater.inflate(R.layout.cool_commandes_model_pour_les_trucs_cool, viewGroup);
+            convertView = inflater.inflate(R.layout.cool_commandes_model_pour_les_trucs_cool, parent, false);
         }
-        Pizza pidz = db.readPizzasses().stream().filter(p->p.getId()==commandeList.get(i).getPidzId()).findFirst().get();
-        ImageView pidzImg = view.findViewById(R.id.imgPidz);
-        TextView price = view.findViewById(R.id.price);
-        TextView total = view.findViewById(R.id.total_price);
-        Button add = view.findViewById(R.id.plus);
-        Button sub = view.findViewById(R.id.moins);
-        TextView qte = view.findViewById(R.id.qte);
+        Pizza pidz = db.readPizzasses().stream()
+                .filter(p -> {
+                    boolean match = p.getId() == commandeList.get(position).getPidzId();
+                    Log.i("PizzaMatch", String.valueOf(p.getId()));
+                    Log.i("PizzaMatch", String.valueOf(commandeList.get(position)));
+                    Log.i("PizzaMatch", String.valueOf(commandeList.get(position).getPidzId()));
+                    if (match) {
+                        Log.d("PizzaMatch", "Found pizza with ID: " + p.getId());
+                    } else {
+                        Log.d("PizzaMatch", "No match for pizza with ID: " + p.getId());
+                    }
+                    return match;
+                })
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Pizza not found for the given ID"));
+
+        ImageView pidzImg = convertView.findViewById(R.id.imgPidz);
+        TextView price = convertView.findViewById(R.id.price);
+        TextView total = convertView.findViewById(R.id.total_price);
+        Button add = convertView.findViewById(R.id.plus);
+        Button sub = convertView.findViewById(R.id.moins);
+        TextView qte = convertView.findViewById(R.id.qte);
         pidzImg.setImageResource(pidz.getImgId());
         price.setText(pidz.getPrix() + "");
         qte.setText("1");
         total.setText((pidz.getPrix() * Double.parseDouble((String) qte.getText())) + "");
         add.setOnClickListener(e -> qte.setText(handleAdd((String) qte.getText())));
         sub.setOnClickListener(e -> qte.setText(handleSub((String) qte.getText())));
-        return view;
+
+        return convertView;
     }
 
     private String handleSub(String text) {
+        Log.i("asd", " --- ");
         double value = Double.parseDouble(text);
         return (value - 1) + "";
     }
 
     private String handleAdd(String text) {
+        Log.i("asd", " +++ ");
         double value = Double.parseDouble(text);
         return (value + 1) + "";
     }

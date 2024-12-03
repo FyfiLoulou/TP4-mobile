@@ -16,10 +16,11 @@ public class Commande {
     @DatabaseField(columnName = "date")
     private String date;
 
-    public Commande(int idClient, double montant, String date) {
+    public Commande(int idClient, double montant, String date, int pidz) {
         this.idClient = idClient;
         this.montant = montant;
         this.date = date;
+        this.pidzId = pidz;
     }
 
     public Commande() {
@@ -68,8 +69,9 @@ public class Commande {
     @Override
     public String toString() {
         return "Commande{" +
-                "noCommande=" + id +
-                ", nomClient='" + idClient + '\'' +
+                "id=" + id +
+                ", idClient=" + idClient +
+                ", pidzId=" + pidzId +
                 ", montant=" + montant +
                 ", date='" + date + '\'' +
                 '}';

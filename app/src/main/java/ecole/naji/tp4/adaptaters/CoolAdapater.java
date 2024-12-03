@@ -69,8 +69,8 @@ public class CoolAdapater extends BaseAdapter {
         ApadteurSpinner adapter = new ApadteurSpinner(context, pizza);
         spinner.setAdapter(adapter);
 
-        buttonAjouter.setOnClickListener(e->{
-            data.insertCommande(new Commande(MainActivity.userConnected, pizza.getPrix(), new Date().toString()));
+        buttonAjouter.setOnClickListener(e -> {
+            data.insertCommande(new Commande(MainActivity.userConnected, pizza.getPrix(), new Date().toString(), pizza.getId()));
             Log.w("lol", "added command");
         });
 

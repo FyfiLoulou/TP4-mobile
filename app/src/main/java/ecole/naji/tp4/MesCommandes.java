@@ -30,19 +30,29 @@ public class MesCommandes extends Fragment {
     private TextView endPrice;
     private Button payer;
 
+    private DatabaseManger miam;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listPidz = requireActivity().findViewById(R.id.list_pidz);
-        prix = requireActivity().findViewById(R.id.prix);
-        points = requireActivity().findViewById(R.id.checkBox);
-        econo = requireActivity().findViewById(R.id.econo);
-        endPrice = requireActivity().findViewById(R.id.end_price);
-        payer = requireActivity().findViewById(R.id.payer);
+        View routeviou = inflater.inflate(R.layout.mes_commandes_frag, container, false);
+        listPidz = routeviou.findViewById(R.id.list_pidz);
+        prix = routeviou.findViewById(R.id.prix);
+        points = routeviou.findViewById(R.id.checkBox);
+        econo = routeviou.findViewById(R.id.econo);
+        endPrice = routeviou.findViewById(R.id.end_price);
+        payer = routeviou.findViewById(R.id.payer);
         payer.setOnClickListener(e -> handlePayer());
         handlePriceCalc();
-        CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), DatabaseManger.getInstance(getContext()));
+
+        miam = DatabaseManger.getInstance(getContext());
+        List<Commande> commandespeutplustard = miam.readCommandesOmg();
+
+        commandespeutplustard.forEach(c -> Log.w("lol", String.valueOf(c)));
+
+        CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), miam, commandespeutplustard);
+        Log.i("asd", "coolAdapter affichage trop cool sick wutang");
         listPidz.setAdapter(coolAdapater);
-        return inflater.inflate(R.layout.mes_commandes_frag, container, false);
+        return routeviou;
     }
 
     private void handlePriceCalc() {
