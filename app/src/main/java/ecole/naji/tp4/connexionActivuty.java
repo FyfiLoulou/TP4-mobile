@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 
@@ -95,25 +96,29 @@ public class connexionActivuty extends Fragment {
         buttonConnection.setOnClickListener(e -> {
             String emailValue = emailInput.getText().toString(), pwValue = String.valueOf(pwInput.getText());
 
+            MainActivity a = (MainActivity) getActivity();
+            FragmentManager aa = getParentFragmentManager();
+
             Optional<Client> client = data.readClientelle().stream().filter(u -> Objects.equals(u.getEmail(), emailValue) && Objects.equals(u.getPw(), pwValue)).findFirst();
             if (client.isPresent()) {
                 Client c = client.get();
                 MainActivity.userConnected = c.getId();
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment, new ListPizza()).commit();
+                aa.beginTransaction().replace(R.id.fragment, new ListPizza()).commit();
                 Log.i("lol", c.getId() + " (←clientId) is connected");
 
-                DrawerLayout dLayout = getActivity().findViewById(R.id.drawer_layout);
-                NavigationView navView = getActivity().findViewById(R.id.navigation);
+
+                DrawerLayout dLayout = a.findViewById(R.id.drawer_layout);
+                NavigationView navView = a.findViewById(R.id.navigation);
                 navView.inflateMenu(R.menu.connected_nav_item);
-                getActivity().findViewById(R.id.proifileincontochange).setVisibility(View.VISIBLE);
-                getActivity().findViewById(R.id.proifileincontochange).setOnClickListener(ee->{
-                    getParentFragmentManager().beginTransaction().replace(R.id.fragment, new UpdateProfileTime()).commit();
+                a.findViewById(R.id.proifileincontochange).setVisibility(View.VISIBLE);
+                a.findViewById(R.id.proifileincontochange).setOnClickListener(ee->{
+                    aa.beginTransaction().replace(R.id.fragment, new UpdateProfileTime()).commit();
                 });
                 navView.setNavigationItemSelectedListener(item -> {
                     Fragment fragment = MainActivity.getFragment(item);
-                    Toast.makeText(getActivity().getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(a.getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
                     if (fragment != null) {
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
+                        a.getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
                         dLayout.closeDrawers();
                         return true;
                     }
