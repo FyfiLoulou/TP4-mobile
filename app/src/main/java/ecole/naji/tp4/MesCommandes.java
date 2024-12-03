@@ -42,21 +42,30 @@ public class MesCommandes extends Fragment {
         endPrice = routeviou.findViewById(R.id.end_price);
         payer = routeviou.findViewById(R.id.payer);
         payer.setOnClickListener(e -> handlePayer());
-        handlePriceCalc();
 
         miam = DatabaseManger.getInstance(getContext());
         List<Commande> commandespeutplustard = miam.readCommandesOmg();
 
         commandespeutplustard.forEach(c -> Log.w("lol", String.valueOf(c)));
+        handlePriceCalc();
 
-        CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), miam, commandespeutplustard);
+        points.setOnClickListener(e->{
+            if (points.isChecked()) endPrice.setText((Double.parseDouble((String) prix.getText())) - 1000+""); // TODO
+            else endPrice.setText( prix.getText() +"");
+        });
+
+        CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), miam, commandespeutplustard, ()->{handlePriceCalc();});
         Log.i("asd", "coolAdapter affichage trop cool sick wutang");
         listPidz.setAdapter(coolAdapater);
         return routeviou;
     }
 
     private void handlePriceCalc() {
+        double priteotal =  miam.readCommandesOmg().stream().map(commande -> commande.getMontant()).reduce((double) 0, (a, b)->a+b);
+        prix.setText(priteotal+"");
 
+        if (points.isChecked()) endPrice.setText(priteotal - 1000+""); // TODO
+        else endPrice.setText(priteotal +"");
     }
 
     // TODO! faire en sorte que sa marche genre
