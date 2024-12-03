@@ -62,10 +62,12 @@ public class MainActivity extends AppCompatActivity {
         int itemId = item.getItemId();
         if (itemId == R.id.accueil_item) {
             fragment = new Accuiel();
+        } else if (itemId == R.id.pizzas_item) {
+            fragment = new ListPizza();
         } else if (itemId == R.id.profil_item) {
             fragment = new UpdateProfileTime();
         } else if (itemId == R.id.commandes_item) {
-            fragment = new ListPizza();
+            fragment = new MesCommandes();
         } else if (itemId == R.id.points_item) {
             fragment = new pointsFrag();
         }
