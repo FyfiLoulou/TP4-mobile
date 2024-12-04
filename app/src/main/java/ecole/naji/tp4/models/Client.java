@@ -72,6 +72,10 @@ public class Client {
         return tel;
     }
 
+    public void calculerPts(double monney){
+        this.point += ((int)monney * 10);
+    }
+
     public void setTel(String tel) {
         this.tel = tel;
     }

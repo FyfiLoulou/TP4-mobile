@@ -120,7 +120,7 @@ public class incriptiionActivyt extends Fragment {
             String adresse = adressInput.getText().toString();
             String tel = telInput.getText().toString();
 
-            Client newCLient = new Client(nom, email, pw, adresse, tel, 10);
+            Client newCLient = new Client(nom, email, pw, adresse, tel, 0);
             Log.w("lol", newCLient.toString());
             data.insertClient(newCLient);
 

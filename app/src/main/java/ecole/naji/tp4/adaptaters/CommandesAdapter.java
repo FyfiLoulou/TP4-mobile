@@ -26,9 +26,6 @@ public class CommandesAdapter extends BaseAdapter {
     private List<Commande> commandeList;
     private Context context;
     private DatabaseManger db;
-    TextView price;
-    TextView total;
-    TextView qte;
     private Runnable yeah;
 
     public CommandesAdapter(Context context, DatabaseManger db, List<Commande> comms, Runnable yeah) {
@@ -61,56 +58,45 @@ public class CommandesAdapter extends BaseAdapter {
         }
 
         Commande ocm    = commandeList.get(position);
+        double initPrix = ocm.getMontant();
 
-        Pizza pidz = db.readPizzasses().stream()
-                .filter(p -> {
-                    boolean match = p.getId() == ocm.getPidzId();
-                    Log.i("PizzaMatch", String.valueOf(p.getId()));
-                    Log.i("PizzaMatch", String.valueOf(commandeList.get(position)));
-                    Log.i("PizzaMatch", String.valueOf(commandeList.get(position).getPidzId()));
-                    if (match) {
-                        Log.d("PizzaMatch", "Found pizza with ID: " + p.getId());
-                    } else {
-                        Log.d("PizzaMatch", "No match for pizza with ID: " + p.getId());
-                    }
-                    return match;
-                })
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Pizza not found for the given ID"));
+        Pizza pidz = db.readPizzasses().stream().filter(p -> p.getId() == ocm.getPidzId()).findFirst().orElseThrow(() -> new IllegalArgumentException("Pizza not found for the given ID"));
 
         ImageView pidzImg = convertView.findViewById(R.id.imgPidz);
-        total = convertView.findViewById(R.id.total_price);
+        TextView total = convertView.findViewById(R.id.total_price);
         Button add = convertView.findViewById(R.id.plus);
         Button sub = convertView.findViewById(R.id.moins);
-        qte = convertView.findViewById(R.id.qte);
-        price = convertView.findViewById(R.id.price);
+        TextView qte = convertView.findViewById(R.id.qte);
+        TextView price = convertView.findViewById(R.id.price);
         pidzImg.setImageResource(pidz.getImgId());
         qte.setText("1");
-        price.setText(pidz.getPrix() + "");
-        total.setText((pidz.getPrix() * Double.parseDouble((String) qte.getText())) + "");
-        add.setOnClickListener(e -> qte.setText(handleAdd((String)qte.getText(), pidz, ocm)));
-        sub.setOnClickListener(e -> qte.setText(handleSub((String)qte.getText(), pidz, ocm)));
+        price.setText(initPrix + "");
+        total.setText(initPrix +"");
+        add.setOnClickListener(e -> qte.setText(handleAdd(total, (String)qte.getText(), initPrix, ocm)));
+        sub.setOnClickListener(e -> qte.setText(handleSub(total, (String)qte.getText(), initPrix, ocm)));
 
         return convertView;
     }
 
-    private String handleSub(String text, Pizza pidz, Commande command){
+    private String handleSub(TextView total, String text, double pidzInitPrix, Commande command){
         Log.i("asd", " --- ");
         double value = Double.parseDouble(text);
-        total.setText(pidz.getPrix() * (value - 1) + "");
-        command.setMontant(pidz.getPrix() * (value - 1));
+        int newQuan_tities = (int) (value - 1);
+        total.setText(pidzInitPrix * newQuan_tities + "");
+        command.setMontant(pidzInitPrix * newQuan_tities);
         db.updateCommmandeClien(command);
         yeah.run();
-        return (value - 1) + "";
+        return newQuan_tities + "";
     }
 
-    private String handleAdd(String text, Pizza pidz, Commande command) {
+    private String handleAdd(TextView total, String text, double pidzInitPrix, Commande command) {
         Log.i("asd", " +++ ");
         double value = Double.parseDouble(text);
-        total.setText(pidz.getPrix() * (value + 1) + "");
-        command.setMontant(pidz.getPrix() * (value + 1));
+        int newQuan_tities = (int) (value + 1);
+        total.setText(pidzInitPrix * newQuan_tities + "");
+        command.setMontant(pidzInitPrix * newQuan_tities);
         db.updateCommmandeClien(command);
         yeah.run();
-        return (value + 1) + "";
+        return newQuan_tities + "";
     }
 }

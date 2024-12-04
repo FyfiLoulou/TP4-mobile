@@ -19,6 +19,7 @@ import java.util.Objects;
 
 import ecole.naji.tp4.adaptaters.CommandesAdapter;
 import ecole.naji.tp4.adaptaters.CoolAdapater;
+import ecole.naji.tp4.models.Client;
 import ecole.naji.tp4.models.Commande;
 
 public class MesCommandes extends Fragment {
@@ -50,37 +51,57 @@ public class MesCommandes extends Fragment {
         handlePriceCalc();
 
         points.setOnClickListener(e->{
-            if (points.isChecked()) endPrice.setText((Double.parseDouble((String) prix.getText())) - 1000+""); // TODO
-            else endPrice.setText( prix.getText() +"");
+            Client connectedClient = miam.readClientelle().stream().filter(u -> u.getId() == MainActivity.userConnected).findFirst().get();
+            double valeurPts = connectedClient.getPoint() * 0.0075;
+            if (points.isChecked()) {
+                endPrice.setText((Double.parseDouble((String) prix.getText())) - valeurPts + "");
+                econo.setText(valeurPts+"");
+            }
+            else {
+                endPrice.setText(prix.getText() + "");
+                econo.setText("RIEN!!");
+            }
         });
 
         CommandesAdapter coolAdapater = new CommandesAdapter(getContext(), miam, commandespeutplustard, ()->{handlePriceCalc();});
-        Log.i("asd", "coolAdapter affichage trop cool sick wutang");
+        Log.i("asd", "coolAdapter affichage trop cool sick wu-chang");
         listPidz.setAdapter(coolAdapater);
         return routeviou;
     }
 
     private void handlePriceCalc() {
-        double priteotal =  miam.readCommandesOmg().stream().map(commande -> commande.getMontant()).reduce((double) 0, (a, b)->a+b);
+        double priteotal =  miam.readCommandesOmg().stream().filter(c->c.getIdClient()==MainActivity.userConnected).map(commande -> commande.getMontant()).reduce((double) 0, (a, b)->a+b);
         prix.setText(priteotal+"");
+        Client connectedClient = miam.readClientelle().stream().filter(u -> u.getId() == MainActivity.userConnected).findFirst().get();
+        double valeurPts = connectedClient.getPoint() * 0.0075;
 
-        if (points.isChecked()) endPrice.setText(priteotal - 1000+""); // TODO
+        if (points.isChecked()) endPrice.setText(priteotal - valeurPts+"");
         else endPrice.setText(priteotal +"");
     }
 
-    // TODO! faire en sorte que sa marche genre
     private void handlePayer() {
+        double payeMoi = Double.parseDouble((String) endPrice.getText());
+        Client connectedClient = miam.readClientelle().stream().filter(u -> u.getId() == MainActivity.userConnected).findFirst().get();
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("ADD to CARDE");
-        builder.setMessage("Passer avais la caisse pour payement par Carde");
+        builder.setMessage("Passer avais la caisse pour payement par Carde -> coutage: "+payeMoi+"$$$$");
         builder.setNeutralButton("Je ne sais pas", (dialog, which) -> {
             Log.w("lol", "PAYER");
+            connectedClient.calculerPts(payeMoi);
+            miam.updateClient(connectedClient);
+            miam.readCommandesOmg().stream().filter(c->c.getIdClient()==MainActivity.userConnected).forEach(om->miam.deelteupdateCommmandeClien(om));
+            connectedClient.setPoint(0);// (LOL YOU LMAO)
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment, new pointsFrag()).commit();
         });
         builder.setNegativeButton("NON", (dialog, which) -> {
             Log.w("lol", "PAS PAYER");
         });
         builder.setPositiveButton("moui", (dialog, which) -> {
-            Log.w("lol", "PAYER");
+            connectedClient.calculerPts(payeMoi);
+            miam.updateClient(connectedClient);
+            miam.readCommandesOmg().stream().filter(c->c.getIdClient()==MainActivity.userConnected).forEach(om->miam.deelteupdateCommmandeClien(om));
+            connectedClient.setPoint(0);// (LOL YOU LMAO)
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment, new pointsFrag()).commit();
         });
         AlertDialog dialog = builder.create();
         dialog.show();
