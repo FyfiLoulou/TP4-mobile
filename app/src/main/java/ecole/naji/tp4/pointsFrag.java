@@ -18,18 +18,22 @@ public class pointsFrag extends Fragment {
 
     DatabaseManger batadase;
 
-    @SuppressLint("MissingInflatedId")
+    /**
+     * Called to create the view for the fragment. This method retrieves the currently connected client,
+     * fetches their point balance from the database, and sets the value to the points TextView.
+     *
+     * @param inflater           The LayoutInflater object to inflate the fragment's view.
+     * @param container          The container where the view will be placed.
+     * @param savedInstanceState A Bundle containing any saved state data (if any).
+     * @return The root view of the fragment.
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.points_frag, container, false);
         batadase = DatabaseManger.getInstance(getContext());
         Client connectedClient = batadase.readClientelle().stream().filter(u -> u.getId() == MainActivity.userConnected).findFirst().get();
-
         points = view.findViewById(R.id.points);
-
         points.setText(connectedClient.getPoint() + "");
-
         return view;
     }
 

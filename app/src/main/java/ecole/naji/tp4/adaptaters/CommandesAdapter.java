@@ -28,6 +28,14 @@ public class CommandesAdapter extends BaseAdapter {
     private DatabaseManger db;
     private Runnable yeah;
 
+    /**
+     * Constructor for the CommandesAdapter.
+     *
+     * @param context The context where the adapter is used (typically the Activity or Fragment).
+     * @param db      The database manager for interacting with the app's database.
+     * @param comms   The list of orders (`Commande`).
+     * @param yeah    A Runnable callback to run when an update occurs (like refreshing the UI).
+     */
     public CommandesAdapter(Context context, DatabaseManger db, List<Commande> comms, Runnable yeah) {
         this.db = db;
         this.commandeList = comms.stream().filter(c -> c.getIdClient() == MainActivity.userConnected).collect(Collectors.toList());
@@ -35,21 +43,47 @@ public class CommandesAdapter extends BaseAdapter {
         this.yeah = yeah;
     }
 
+    /**
+     * Returns the number of orders in the list.
+     *
+     * @return The number of orders in the list.
+     */
     @Override
     public int getCount() {
         return commandeList.size();
     }
 
+    /**
+     * Returns the order at the specified position.
+     *
+     * @param i The position of the item.
+     * @return The order at the given position.
+     */
     @Override
     public Object getItem(int i) {
         return commandeList.get(i);
     }
 
+    /**
+     * Returns the ID of the order at the specified position.
+     *
+     * @param i The position of the item.
+     * @return The ID of the order.
+     */
     @Override
     public long getItemId(int i) {
         return commandeList.get(i).getId();
     }
 
+    /**
+     * This method inflates the order item layout and sets the pizza details in the ListView.
+     * It also handles increasing and decreasing the pizza quantity and updating the total price.
+     *
+     * @param position    The position of the item to display in the list.
+     * @param convertView The recycled view (if any).
+     * @param parent      The parent view group.
+     * @return The custom view for the order item.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -57,9 +91,11 @@ public class CommandesAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.cool_commandes_model_pour_les_trucs_cool, parent, false);
         }
 
-        Commande ocm    = commandeList.get(position);
+        // Get the current order (Commande) at the specified position
+        Commande ocm = commandeList.get(position);
         double initPrix = ocm.getMontant();
 
+        // Find the pizza associated with this order
         Pizza pidz = db.readPizzasses().stream().filter(p -> p.getId() == ocm.getPidzId()).findFirst().orElseThrow(() -> new IllegalArgumentException("Pizza not found for the given ID"));
 
         ImageView pidzImg = convertView.findViewById(R.id.imgPidz);
@@ -71,14 +107,26 @@ public class CommandesAdapter extends BaseAdapter {
         pidzImg.setImageResource(pidz.getImgId());
         qte.setText("1");
         price.setText(initPrix + "");
-        total.setText(initPrix +"");
-        add.setOnClickListener(e -> qte.setText(handleAdd(total, (String)qte.getText(), initPrix, ocm)));
-        sub.setOnClickListener(e -> qte.setText(handleSub(total, (String)qte.getText(), initPrix, ocm)));
+        total.setText(initPrix + "");
+
+        // Set the click listeners for increasing and decreasing the quantity
+        add.setOnClickListener(e -> qte.setText(handleAdd(total, (String) qte.getText(), initPrix, ocm)));
+        sub.setOnClickListener(e -> qte.setText(handleSub(total, (String) qte.getText(), initPrix, ocm)));
 
         return convertView;
     }
 
-    private String handleSub(TextView total, String text, double pidzInitPrix, Commande command){
+    /**
+     * Handles decreasing the pizza quantity and updates the total price.
+     * If the quantity is 1, it doesn't allow further decrease.
+     *
+     * @param total        The TextView displaying the total price.
+     * @param text         The current quantity of the pizza.
+     * @param pidzInitPrix The initial price of the pizza.
+     * @param command      The current order (`Commande`).
+     * @return The updated quantity as a string.
+     */
+    private String handleSub(TextView total, String text, double pidzInitPrix, Commande command) {
         Log.i("asd", " --- ");
         double value = Double.parseDouble(text);
         int newQuan_tities = (int) (value - 1);
@@ -89,6 +137,15 @@ public class CommandesAdapter extends BaseAdapter {
         return newQuan_tities + "";
     }
 
+    /**
+     * Handles increasing the pizza quantity and updates the total price.
+     *
+     * @param total        The TextView displaying the total price.
+     * @param text         The current quantity of the pizza.
+     * @param pidzInitPrix The initial price of the pizza.
+     * @param command      The current order (`Commande`).
+     * @return The updated quantity as a string.
+     */
     private String handleAdd(TextView total, String text, double pidzInitPrix, Commande command) {
         Log.i("asd", " +++ ");
         double value = Double.parseDouble(text);
