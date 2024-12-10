@@ -97,10 +97,16 @@ public class MesCommandes extends Fragment {
             Log.w("lol", "PAS PAYER");
         });
         builder.setPositiveButton("moui", (dialog, which) -> {
-            connectedClient.calculerPts(payeMoi);
+            if(points.isChecked()){
+                connectedClient.calculerPts(0);
+                connectedClient.setPoint(0);
+            }
+            else {
+                connectedClient.calculerPts(payeMoi);
+            }
+
             miam.updateClient(connectedClient);
             miam.readCommandesOmg().stream().filter(c->c.getIdClient()==MainActivity.userConnected).forEach(om->miam.deelteupdateCommmandeClien(om));
-            connectedClient.setPoint(0);// (LOL YOU LMAO)
             getParentFragmentManager().beginTransaction().replace(R.id.fragment, new pointsFrag()).commit();
         });
         AlertDialog dialog = builder.create();
