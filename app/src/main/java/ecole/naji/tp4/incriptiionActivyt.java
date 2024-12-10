@@ -33,6 +33,16 @@ public class incriptiionActivyt extends Fragment {
     private Button buttonCrrer;
     private DatabaseManger data;
 
+
+    /**
+     * Called to create the view for the fragment. Initializes the database manager,
+     * sets up the input fields, and attaches listeners to validate user input.
+     *
+     * @param inflater           The LayoutInflater object to inflate the fragment's view.
+     * @param container          The container where the view will be placed.
+     * @param savedInstanceState A Bundle containing any saved state data (if any).
+     * @return The root view of the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.inscription, container, false);
@@ -54,6 +64,12 @@ public class incriptiionActivyt extends Fragment {
         return rootView;
     }
 
+    /**
+     * Initializes the input fields and sets up text watchers to validate the user input.
+     * The button will only be enabled if all fields are correctly filled.
+     *
+     * @param rootView The root view of the fragment containing the input fields.
+     */
     void handleTouch(MotionEvent m)
     {
         int pointerCount = m.getPointerCount();
@@ -101,11 +117,15 @@ public class incriptiionActivyt extends Fragment {
         emailInput = rootView.findViewById(R.id.email);
         pwInput = rootView.findViewById(R.id.pw);
         buttonCrrer = rootView.findViewById(R.id.creer);
+
+        // Initially disable the button
         buttonCrrer.setEnabled(false);
 
+        // Email validation
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -116,12 +136,15 @@ public class incriptiionActivyt extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
+        // Name validation
         nomInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -132,12 +155,15 @@ public class incriptiionActivyt extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
+        // Password validation
         pwInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -148,12 +174,15 @@ public class incriptiionActivyt extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
+        // Phone number validation
         telInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -165,9 +194,11 @@ public class incriptiionActivyt extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
+        // OnClickListener for the registration button
         buttonCrrer.setOnClickListener(e -> {
             String nom = nomInput.getText().toString();
             String email = emailInput.getText().toString();
@@ -175,6 +206,7 @@ public class incriptiionActivyt extends Fragment {
             String adresse = adressInput.getText().toString();
             String tel = telInput.getText().toString();
 
+            // Create a new Client object and insert it into the database
             Client newCLient = new Client(nom, email, pw, adresse, tel, 0);
             Log.w("lol", newCLient.toString());
             data.insertClient(newCLient);
@@ -183,6 +215,12 @@ public class incriptiionActivyt extends Fragment {
         });
     }
 
+    /**
+     * Validates the email address using a regular expression to ensure it is in a valid format.
+     *
+     * @param email The email address to be validated.
+     * @return True if the email is valid, false otherwise.
+     */
     private boolean isValidate(String email) {
         Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);

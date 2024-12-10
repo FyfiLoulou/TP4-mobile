@@ -21,10 +21,23 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
 
     private static DatabaseManger instance;
 
+    /**
+     * Private constructor for the DatabaseManager class.
+     * Initializes the ORMLite database helper with the provided context.
+     *
+     * @param context The context to initialize the database manager.
+     */
     private DatabaseManger(Context context) {
         super(context, DATABESE_NAME, null, DATABESE_JAIME_DANSER_VERSION);
     }
 
+    /**
+     * Returns the singleton instance of the DatabaseManger.
+     * If the instance is not already created, it initializes a new one.
+     *
+     * @param context The context to initialize the database manager.
+     * @return The singleton instance of the DatabaseManger.
+     */
     public static synchronized DatabaseManger getInstance(Context context) {
         if (instance == null) {
             instance = new DatabaseManger(context.getApplicationContext());
@@ -32,6 +45,12 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         return instance;
     }
 
+    /**
+     * Creates the database tables (Pizza, Commande, and Client) when the database is created.
+     *
+     * @param database The SQLite database instance.
+     * @param connSrc  The connection source for the database.
+     */
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connSrc) {
         try {
@@ -44,8 +63,17 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Updates the database schema when the database version is upgraded.
+     * Drops existing tables and recreates them.
+     *
+     * @param database   The SQLite database instance.
+     * @param connSrc    The connection source for the database.
+     * @param oldVersion The old version of the database.
+     * @param newVersion The new version of the database.
+     */
     @Override
-    public void onUpgrade(SQLiteDatabase database, ConnectionSource connSrc, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase database, ConnectionSource connSrc, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connSrc, Pizza.class, true);
             TableUtils.dropTable(connSrc, Commande.class, true);
@@ -57,6 +85,11 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Inserts a new client into the database.
+     *
+     * @param client The `Client` object to be inserted.
+     */
     public void insertClient(Client client) {
         try {
             getDao(Client.class).create(client);
@@ -66,6 +99,11 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Updates an existing client in the database.
+     *
+     * @param client The `Client` object to be updated.
+     */
     public void updateClient(Client client) {
         try {
             getDao(Client.class).update(client);
@@ -75,23 +113,39 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    public void insertCommande(Commande c912312wsdabhyuoazdbvhavsf76sbgrdtfasudafda) {
+    /**
+     * Inserts a new order (Commande) into the database.
+     *
+     * @param commande The `Commande` object to be inserted.
+     */
+    public void insertCommande(Commande commande) {
         try {
-            getDao(Commande.class).create(c912312wsdabhyuoazdbvhavsf76sbgrdtfasudafda);
-            Log.i("DATABES INSERTED", "Score inserted" + c912312wsdabhyuoazdbvhavsf76sbgrdtfasudafda.toString());
+            getDao(Commande.class).create(commande);
+            Log.i("DATABES INSERTED", "Score inserted" + commande.toString());
         } catch (Exception e) {
             Log.e("DATABSES ERROR", "ERROR: po marcehre la jout des scores" + e.getMessage());
         }
     }
 
+    /**
+     * Inserts a new pizza into the database.
+     *
+     * @param imAPizzaBoy The `Pizza` object to be inserted.
+     */
     public void insertPizze(Pizza imAPizzaBoy) {
         try {
             getDao(Pizza.class).create(imAPizzaBoy);
             Log.i("DATABES INSERTED", "Pizza inserted" + imAPizzaBoy.toString());
         } catch (Exception e) {
-            Log.e("DATABSES ERROR","ERROR:" + e.getMessage());
+            Log.e("DATABSES ERROR", "ERROR:" + e.getMessage());
         }
     }
+
+    /**
+     * Updates an existing order (Commande) in the database.
+     *
+     * @param cliencommande The `Commande` object to be updated.
+     */
 
     public void updateCommmandeClien(Commande cliencommande) {
         try {
@@ -102,6 +156,11 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Deletes an existing order (Commande) from the database.
+     *
+     * @param cliencommande The `Commande` object to be deleted.
+     */
     public void deelteupdateCommmandeClien(Commande cliencommande) {
         try {
             getDao(Commande.class).delete(cliencommande);
@@ -111,6 +170,11 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Reads and retrieves all pizzas from the database.
+     *
+     * @return A list of `Pizza` objects.
+     */
     public List<Pizza> readPizzasses() {
         try {
             Dao<Pizza, Integer> dao = getDao(Pizza.class);
@@ -121,6 +185,11 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Reads and retrieves all orders (Commandes) from the database.
+     *
+     * @return A list of `Commande` objects.
+     */
     public List<Commande> readCommandesOmg() {
         try {
             Dao<Commande, Integer> dao = getDao(Commande.class);
@@ -131,6 +200,11 @@ public class DatabaseManger extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Reads and retrieves all clients from the database.
+     *
+     * @return A list of `Client` objects.
+     */
     public List<Client> readClientelle() {
         try {
             Dao<Client, Integer> dao = getDao(Client.class);
