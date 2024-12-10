@@ -25,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout dLayout;
     public static int userConnected = -1; // -1 when no user connected else id
 
+    /**
+     * Called when the activity is first created. It initializes the user interface, sets up
+     * the toolbar, and initializes the navigation drawer.
+     *
+     * @param savedInstanceState Bundle containing the activity's previously saved state, if any.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         setNavigationDrawer();
     }
 
+    /**
+     * Sets up the navigation drawer by initializing the DrawerLayout and attaching the
+     * NavigationView to it. It also configures the menu items based on the user's
+     * connection status.
+     */
     public void setNavigationDrawer() {
         dLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = findViewById(R.id.navigation);
@@ -57,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Returns the corresponding fragment based on the selected menu item.
+     *
+     * @param item The menu item that was clicked in the navigation drawer.
+     * @return The corresponding fragment to display, or null if the item is not recognized.
+     */
     public static Fragment getFragment(MenuItem item) {
         Fragment fragment = null;
         int itemId = item.getItemId();
