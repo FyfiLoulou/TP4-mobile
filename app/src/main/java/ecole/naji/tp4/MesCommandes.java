@@ -2,7 +2,9 @@ package ecole.naji.tp4;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,7 +12,10 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 
 import java.util.List;
@@ -22,7 +27,7 @@ import ecole.naji.tp4.adaptaters.CoolAdapater;
 import ecole.naji.tp4.models.Client;
 import ecole.naji.tp4.models.Commande;
 
-public class MesCommandes extends Fragment {
+public class MesCommandes extends Fragment implements GestureDetector.OnGestureListener {
 
     private ListView listPidz;
     private TextView prix;
@@ -32,6 +37,7 @@ public class MesCommandes extends Fragment {
     private Button payer;
 
     private DatabaseManger miam;
+    private GestureDetectorCompat gestureDetector;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class MesCommandes extends Fragment {
         endPrice = routeviou.findViewById(R.id.end_price);
         payer = routeviou.findViewById(R.id.payer);
         payer.setOnClickListener(e -> handlePayer());
+        this.gestureDetector = new GestureDetectorCompat(getContext(),this);
 
         miam = DatabaseManger.getInstance(getContext());
         List<Commande> commandespeutplustard = miam.readCommandesOmg();
@@ -105,5 +112,52 @@ public class MesCommandes extends Fragment {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    //@Override
+    //public boolean onTouchEvent(MotionEvent event) {
+    //    this.gestureDetector.onTouchEvent(event);  // Use the correct variable name
+    //    return super.onTouchEvent(event);
+    //}
+    @Override
+    public boolean onDown(@NonNull MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(@NonNull MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(@NonNull MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(@Nullable MotionEvent motionEvent, @NonNull MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(@NonNull MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(@Nullable MotionEvent motionEvent, @NonNull MotionEvent motionEvent1, float v, float v1) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Bonjour Naji!");
+        builder.setMessage("Allo!");
+        builder.setNeutralButton("Je ne sais pas", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.setPositiveButton("Bye", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.setNegativeButton("Ou suis-je?", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        return true;
     }
 }

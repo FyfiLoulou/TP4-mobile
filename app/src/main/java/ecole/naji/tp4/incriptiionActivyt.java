@@ -6,11 +6,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import java.util.regex.Matcher;
@@ -35,7 +39,58 @@ public class incriptiionActivyt extends Fragment {
         data = DatabaseManger.getInstance(getContext());
 
         initEditField(rootView);
+
+
+        rootView.findViewById(R.id.inscription).setOnTouchListener(new ConstraintLayout.OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent m) {
+                        handleTouch(m);
+                        return true;
+                    }
+                }
+        );
+
+
+
         return rootView;
+    }
+
+    void handleTouch(MotionEvent m)
+    {
+        int pointerCount = m.getPointerCount();
+        for (int i = 0; i < pointerCount; i++)
+        {
+            int x = (int) m.getX(i);
+            int y = (int) m.getY(i);
+            int id = m.getPointerId(i);
+            // on récupère l’action
+            int action = m.getActionMasked();
+            String actionString;
+
+            switch (action)
+            {  case MotionEvent.ACTION_DOWN:
+                actionString = "DOWN";
+                break;
+                case MotionEvent.ACTION_UP:
+                    actionString = "UP";
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    actionString = "PNTR DOWN";
+                    break;
+                case MotionEvent.ACTION_POINTER_UP:
+                    actionString = "PNTR UP";
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    actionString = "MOVE";
+                    break;
+                default:
+                    actionString = "";
+
+            }
+            System.out.println("compteur:"+ pointerCount);
+            String touchStatus = "Vous avez fait l'action '" + actionString + "' à cet endroit (" + x + ", " + y+")";
+
+            Toast.makeText(getContext(), touchStatus, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initEditField(View rootView) {
