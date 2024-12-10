@@ -27,7 +27,7 @@ import ecole.naji.tp4.adaptaters.CoolAdapater;
 import ecole.naji.tp4.models.Client;
 import ecole.naji.tp4.models.Commande;
 
-public class MesCommandes extends Fragment implements GestureDetector.OnGestureListener {
+public class MesCommandes extends Fragment implements GestureDetector.OnGestureListener,GestureDetector.OnDoubleTapListener {
 
     private ListView listPidz;
     private TextView prix;
@@ -114,11 +114,7 @@ public class MesCommandes extends Fragment implements GestureDetector.OnGestureL
         dialog.show();
     }
 
-    //@Override
-    //public boolean onTouchEvent(MotionEvent event) {
-    //    this.gestureDetector.onTouchEvent(event);  // Use the correct variable name
-    //    return super.onTouchEvent(event);
-    //}
+
     @Override
     public boolean onDown(@NonNull MotionEvent motionEvent) {
         return false;
@@ -159,5 +155,20 @@ public class MesCommandes extends Fragment implements GestureDetector.OnGestureL
             dialog.dismiss();
         });
         return true;
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(@NonNull MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTap(@NonNull MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(@NonNull MotionEvent motionEvent) {
+        return false;
     }
 }
